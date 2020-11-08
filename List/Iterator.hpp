@@ -40,12 +40,9 @@ class Iterator{
                 Node* getLink()const;
 
 
-                /*Overloads*/
+                /*Overloads prefix operators*/
                 Iterator& operator++();
-                Iterator& operator++(int);
-
                 Iterator& operator--();
-                Iterator& operator--(int);
 
 		/*member of pointer*/
 		Node* operator->();

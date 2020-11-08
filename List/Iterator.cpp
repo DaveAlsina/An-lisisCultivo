@@ -46,6 +46,7 @@ Node* Iterator::getLink()const{
 	return link;
 }
 
+
 /*
  *Decrement and increment operators
  *
@@ -58,25 +59,13 @@ Iterator& Iterator::operator++(){ //prefijo++
 }
 
 
-Iterator& Iterator::operator++(int){
-
-	link = link->next;  
-	return *this;
-}
-
-
-Iterator& Iterator::operator--(){
+Iterator& Iterator::operator--(){ //prefijo--
 
 	link = link->prev;  
 	return *this;
 }
 
 
-Iterator& Iterator::operator--(int){
-
-	link = link->prev;  
-	return *this;
-}
 
 
 /*Member of pointer*/
