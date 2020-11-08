@@ -19,4 +19,3 @@ data = [ dfTemp[ col[0]], dfHum[ col[1]], dfHeat[ col[2]], dfDewp[ col[3]], dfDe
 dfResult = pd.concat(data, axis = 1, keys = headers)
 
 dfResult.to_csv("generalData.csv")
-data1.head(n=6)
