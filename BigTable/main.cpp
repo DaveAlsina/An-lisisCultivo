@@ -1,5 +1,4 @@
 #include "cultivo_v1.hpp"
-//#include "list.hpp"
 #include <iostream>
 using namespace std;
 
