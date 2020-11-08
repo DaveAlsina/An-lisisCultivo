@@ -35,16 +35,8 @@ class List{
 		void push_back(Node* newElement);
 		void push_front(Node* newElement);
 
-		void pop_back();  //necesario???
-	        void pop_front(); //necesario??? 	
 		void clear();
 
-		/*
-		 * Getters
-		 *
-		 */
-		Node* front()const; //necesario???
-		Node* back()const;  //necesario???
 };
 
 #include "list.cpp"

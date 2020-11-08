@@ -86,7 +86,7 @@ void List::clear(){
 	while(it.getLink() != nullptr){
 		
 		Node* old = it.getLink();
-		it++; 
+		++it; 
 		delete old;
 		len--;	
 	}
