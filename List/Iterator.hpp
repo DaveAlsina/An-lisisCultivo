@@ -9,15 +9,15 @@ struct Node{
         Node(short int d = 0, short int m = 0, short int min = 0, double t=0,
         double hi = 0, double dp = 0, short int h = 0): day(d), month(m), minute(min), temp(t), heatIndx(hi), dewPoint(dp), hum(h){}
 
-        const short int day;
-        const short int month;
-        const short int minute;
+        short int day;
+        short int month;
+        short int minute;
 
-        const double temp;
-        const double heatIndx;
-        const double dewPoint;
+        double temp;
+        double heatIndx;
+        double dewPoint;
 
-        const short int hum;
+        short int hum;
         Node* next = nullptr;
         Node* prev = nullptr;
 };

@@ -21,7 +21,7 @@ Iterator::Iterator(Node* pointer){
 Iterator::~Iterator(){
 	link = nullptr;	
 	delete link;
-	cout<<"destroyed iterator."<<endl;
+	//cout<<"destroyed iterator."<<endl;
 }
 
 
