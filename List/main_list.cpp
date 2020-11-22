@@ -27,13 +27,8 @@ int main(){
 
 	cout<<endl<<"For Loop para revisar operación del iterador"<<endl<<endl;
 	
-	for(Iterator it = lst.Begin(); it != nullptr; --it){
-		
-		cout<< it->minute <<" "<<it->day <<" "<<it->month <<endl; 
-		cout<< it->temp <<" "<< it->heatIndx<<" "<< it->dewPoint<<" " << it->hum <<" "<< endl; 	
-	}
-
-	cout<<endl<<endl; 
+	lst.display();
+	
 	delete empty1;
 	return 0; 
 }
