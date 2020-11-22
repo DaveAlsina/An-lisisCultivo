@@ -37,6 +37,14 @@ class List{
 
 		void clear();
 
+		/*
+		 * Getters and Displayers
+		 *
+		 */
+		
+		void display();
+		unsigned size();
+
 };
 
 #include "list.cpp"

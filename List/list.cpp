@@ -24,6 +24,27 @@ List::~List(){
 
 
 /*
+ *Getters and Displayers
+ *
+ */
+
+void List::display(){
+	Iterator it = this->Begin();  
+
+	for( ; it != nullptr; ++it){
+
+		cout<< it->minute <<" "<<it->day <<" "<<it->month <<endl; 
+		cout<< it->temp <<" "<< it->heatIndx<<" "<< it->dewPoint<<" " << it->hum <<" "<< endl;
+		cout<<endl;
+	}
+}
+
+unsigned List::size(){
+	return len;
+}
+
+
+/*
  * Iterators Creation 
  *
  */
@@ -36,12 +57,12 @@ Iterator List::Begin(){
 }
 
 
-
 Iterator List::End(){
 	
 	Iterator it(end);  
 	return it;  
 }
+
 
 /*
  *Modifiers
