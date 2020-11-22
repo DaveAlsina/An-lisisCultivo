@@ -3,10 +3,15 @@
 
 #include <iostream>
 #include <string>
+#include "../List/list.hpp"
+
 using namespace std;
 
+
+//en este caso se debe cambiar el table size por 60*24
 const int TABLE_SIZE = 24; // numero de horas al día
 
+/*
 template <typename VT>
 struct DayHour{
 	int hour;
@@ -20,14 +25,12 @@ struct HourMinute{
 	//Node <VT> * minuteData;
 	HourMinute <VT> * nextMinute;
 };
+*/
 
-
-
-template <typename VT>
 class BigTable{
 	private:
   		//Puntero al buckets que clasifican por toda la info en horas del día
-		DayHour <VT> ** table;
+		List** table;
 
 		int tableSize;
 		int count; //numero de elementos en la tabla
@@ -39,19 +42,30 @@ class BigTable{
 		BigTable();
 		~BigTable();
 		
-		int size(); //Returna el número de Nodes que tiene el DS
+		/*
+		*	Getters
+		*/ 		
+		int size(); //Returna el número de Nodes que tiene el HashTable
 		bool empty(); //true if there are no elements
 		
-		//Agrega un Node a un HourMinute que está dentro de un DayHour
-		void insert();
+		
+		/*
+		*	Modifiers
+		*/ 		
+		//Agrega un 'Node' a las listas de los buckets 
+		void insert(Node* n);		
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
 		float get_mean_temp(int hour); 
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
 		float get_mean_hum(int hour); 
-		
-		void display(); //Imprime la tabla completa
+	
+		/*
+		*	Displayers
+		*/ 		
+		void display(); //Imprime la tabla completa	
+		void displayDistro(); //imprime la cantidad de elementos por lista
 };
 
 
