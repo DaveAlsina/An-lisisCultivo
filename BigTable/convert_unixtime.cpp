@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int convert_unixtime(time_t rawtime){
+int convert_unixt_day_min(time_t rawtime){
   struct tm * timeinfo;
   //En caso de que queramos corregir el unixtime multiplicado por mil
   // rawtime /= 1000;
@@ -22,6 +22,39 @@ int convert_unixtime(time_t rawtime){
   // cout << "Minute of day: " << day_min << endl;
 
   return day_min;
+}
+
+int convert_unixt_day(time_t rawtime){
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int day = timeinfo->tm_mday;
+
+  return day;
+}
+
+int convert_unixt_month(time_t rawtime){
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int month = 1 + timeinfo->tm_mon;
+
+  return month;
+}
+
+int convert_unixt_year(time_t rawtime){
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int year = 1900 + timeinfo->tm_year;
+
+  return year;
 }
 
 int main(){
