@@ -9,23 +9,8 @@ using namespace std;
 
 
 //en este caso se debe cambiar el table size por 60*24
-const int TABLE_SIZE = 24; // numero de horas al día
+const int TABLE_SIZE = 1440; // numero de horas al día
 
-/*
-template <typename VT>
-struct DayHour{
-	int hour;
-	//HourMinute <VT> * minutes;
-	DayHour <VT> * nextHour;
-};
-
-template <typename VT>
-struct HourMinute{
-	int minute;
-	//Node <VT> * minuteData;
-	HourMinute <VT> * nextMinute;
-};
-*/
 
 class BigTable{
 	private:
@@ -36,7 +21,7 @@ class BigTable{
 		int count; //numero de elementos en la tabla
 
 		//metodo que recibe una valor en unixtime, lo convierte a hora:min:seg, y lo envia a DayHour según la hora convertida
-		int hash(long long int unixtime);
+		int hash(Node* n);
 
 	public:
 		BigTable();

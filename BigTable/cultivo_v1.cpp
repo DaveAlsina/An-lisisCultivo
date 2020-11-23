@@ -27,6 +27,12 @@ BigTable::~BigTable(){
 	delete[] table;
 }
 
+
+int BigTable::hash(Node* n){
+	return n->dayMinute;	
+}
+
+
 /*
 *       Getters
 */
@@ -41,8 +47,9 @@ int BigTable::size(){
 */
 
 void BigTable::insert(Node* n){
-
-	List* sublist = table[n->minute];
+	
+	int bucket = hash(n); 
+	List* sublist = table[bucket];
 	cout<<"acceso al bucket"<<endl;
 	sublist->push_back(n);
 	count++;
