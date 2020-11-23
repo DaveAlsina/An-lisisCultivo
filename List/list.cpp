@@ -33,7 +33,7 @@ void List::display(){
 
 	for( ; it != nullptr; ++it){
 
-		cout<< it->minute <<" "<<it->day <<" "<<it->month <<endl; 
+		cout<< it->year <<" "<< it->dayMinute <<" "<<it->day <<" "<<it->month <<endl; 
 		cout<< it->temp <<" "<< it->heatIndx<<" "<< it->dewPoint<<" " << it->hum <<" "<< endl;
 		cout<<endl;
 	}
@@ -72,19 +72,16 @@ Iterator List::End(){
 //Adders
 void List::push_back(Node* newElement){
 
-
 	if(len==0){
 	
-		newElement->prev = end;	 //el puntero al elemento previo del elemento nuevo apunta hacia el final (el final viejo)
 		end = newElement;  //el puntero al siguiente elemento del último nodo, lo apunta hacia el nuevo elemento
 		start = newElement;
 		len++;
-
 		return; 
 	}
 
-	end->next = newElement;  //el puntero al siguiente elemento del último nodo, lo apunta hacia el nuevo elemento
 	newElement->prev = end;	 //el puntero al elemento previo del elemento nuevo apunta hacia el final (el final viejo)
+	end->next = newElement;  //el puntero al siguiente elemento del último nodo, lo apunta hacia el nuevo elemento
 	end = newElement; 	 //el final ahora apunta hacia el elemento añadido recién	
 
 	len++;	
