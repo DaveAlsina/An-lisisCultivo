@@ -3,6 +3,8 @@
 using namespace std;
 
 int convert_unixt_day_min(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el minuto del día
+
   struct tm * timeinfo;
   //En caso de que queramos corregir el unixtime multiplicado por mil
   // rawtime /= 1000;
@@ -25,6 +27,8 @@ int convert_unixt_day_min(time_t rawtime){
 }
 
 int convert_unixt_day(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el día del mes
+
   struct tm * timeinfo;
   //En caso de que queramos corregir el unixtime multiplicado por mil
   // rawtime /= 1000;
@@ -36,6 +40,8 @@ int convert_unixt_day(time_t rawtime){
 }
 
 int convert_unixt_month(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el mes del año
+
   struct tm * timeinfo;
   //En caso de que queramos corregir el unixtime multiplicado por mil
   // rawtime /= 1000;
@@ -47,6 +53,8 @@ int convert_unixt_month(time_t rawtime){
 }
 
 int convert_unixt_year(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el año
+
   struct tm * timeinfo;
   //En caso de que queramos corregir el unixtime multiplicado por mil
   // rawtime /= 1000;
@@ -58,13 +66,29 @@ int convert_unixt_year(time_t rawtime){
 }
 
 int main(){
+  //Descomentar para entender mejor que hace cada función
+
   // cout << "Function test 1: " << endl;
-  // int test1 = convert_unixtime(1595617740);
-  // cout << "Minute of day: " << test1 << endl;
+  // int day_min_1 = convert_unixt_day_min(1595617740);
+  // int year1 = convert_unixt_year(1595617740);
+  // int month1 = convert_unixt_month(1595617740);
+  // int day1 = convert_unixt_day(1595617740);
+  // cout << "Year: " << year1 << endl;
+  // cout << "Month: " << month1 << endl;
+  // cout << "Day: " << day1 << endl;
+  // cout << "Minute of day: " << day_min_1 << endl;
+  //
+  // cout << endl;
   //
   // cout << "Function test 2: " << endl;
-  // int test2 = convert_unixtime(1595617800);
-  // cout << "Minute of day: " << test2 << endl;
+  // int day_min_2 = convert_unixt_day_min(1595617800);
+  // int year2 = convert_unixt_year(1595617800);
+  // int month2 = convert_unixt_month(1595617800);
+  // int day2 = convert_unixt_day(1595617800);
+  // cout << "Year: " << year2 << endl;
+  // cout << "Month: " << month2 << endl;
+  // cout << "Day: " << day2 << endl;
+  // cout << "Minute of day: " << day_min_2 << endl;
 
   return 0;
 }
