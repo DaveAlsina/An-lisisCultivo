@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -13,6 +14,10 @@
 using namespace std;
 
 void readCsv(List& obj, string dir);
+int convert_unixt_day_min(time_t rawtime);
+int convert_unixt_day(time_t rawtime);
+int convert_unixt_month(time_t rawtime);
+int convert_unixt_year(time_t rawtime);
 
 int main(){
 	/*
@@ -21,9 +26,9 @@ int main(){
         //testeo constructor por defecto de Node
         Node* empty1 = new Node;
 
-        //testeo contructor de iterador 
+        //testeo contructor de iterador
         Iterator it(empty1);
-	
+
         //testeo creación de lista vacía
         List lst;
         cout<<endl<<"Lista creada"<<endl;
@@ -32,17 +37,79 @@ int main(){
 	*/
 
 	List lst;
-	readCsv(lst , "generalData.csv"); 
+	readCsv(lst , "generalData.csv");
 
 	for(Iterator it = lst.Begin(); it != nullptr; ++it){
-		cout << "Mes: " << it->month << " Día: " << it->day << " Minuto: " << it->minute << endl; 
-		cout << "temp: " << it->temp << " HeatIndx: " << it->heatIndx << " dp: " << it->dewPoint << " hum: " << it->hum;     
+		cout << "Mes: " << it->month << " Día: " << it->day << " Minuto: " << it->minute << endl;
+		cout << "temp: " << it->temp << " HeatIndx: " << it->heatIndx << " dp: " << it->dewPoint << " hum: " << it->hum;
 		cout << endl << endl;
 	}
 
 	return 0;
 }
 
+int convert_unixt_day_min(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el minuto del día
+
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  // int year = 1900 + timeinfo->tm_year;
+  // int month = 1 + timeinfo->tm_mon;
+  // int day = timeinfo->tm_mday;
+  int hour = timeinfo->tm_hour;
+  int minutes = timeinfo->tm_min;
+
+  int day_min = hour* 60 + minutes;
+
+  // cout << "Year: " << year << endl;
+  // cout << "Month: " << month << endl;
+  // cout << "Day: " << day << endl;
+  // cout << "Minute of day: " << day_min << endl;
+
+  return day_min;
+}
+
+int convert_unixt_day(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el día del mes
+
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int day = timeinfo->tm_mday;
+
+  return day;
+}
+
+int convert_unixt_month(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el mes del año
+
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int month = 1 + timeinfo->tm_mon;
+
+  return month;
+}
+
+int convert_unixt_year(time_t rawtime){
+  //Función que recibe un número en unixtime y retorna el año
+
+  struct tm * timeinfo;
+  //En caso de que queramos corregir el unixtime multiplicado por mil
+  // rawtime /= 1000;
+
+  timeinfo = localtime (&rawtime);
+  int year = 1900 + timeinfo->tm_year;
+
+  return year;
+}
 
 
 void readCsv(List& obj, string dir){
@@ -53,26 +120,26 @@ void readCsv(List& obj, string dir){
 	long long int date = 0;	 //variable que guarda la fecha en tiempo unix
 
 	if(temporal.good()){	 //si el input file stream está bien
-	
+
 		while(!temporal.eof()){ //mientras el stream no esté vacio...
-			
-			getline(temporal, line); //obtiene la linea actual y la guarda en 'line'	
-			stringstream ss(line);   //crea un stream de string para moverse a través de él cómodamente	
-		
+
+			getline(temporal, line); //obtiene la linea actual y la guarda en 'line'
+			stringstream ss(line);   //crea un stream de string para moverse a través de él cómodamente
+
 			ss.ignore(7, ',');	//ignora máximo 7 caracteres hasta poder llegar a la primera coma
 
 			for(int i=0; i<4; i++){			  //guarda las demás columnas en sus casillas
-				if(ss.peek() == ',') ss.ignore(); //ignora la coma	
+				if(ss.peek() == ',') ss.ignore(); //ignora la coma
 				ss >> cols[i];		  	  //hace la siguiente extracción
 			}
-		
-			if(ss.peek() == ',') ss.ignore(); //ignora la coma	
-			ss >> date;			  //guarda la última columna (la de la fecha) *WeNeedMagicHere!!!*	
-			date /= 1000;	
-			
+
+			if(ss.peek() == ',') ss.ignore(); //ignora la coma
+			ss >> date;			  //guarda la última columna (la de la fecha) *WeNeedMagicHere!!!*
+			date /= 1000;
+
 			//guardado de los datos en un nodo asistente
-			Node* assistant = new Node(0,0,0, cols[0], cols[1], cols[2], cols[3]);		
-			
+			Node* assistant = new Node(0,0,0, cols[0], cols[1], cols[2], cols[3]);
+
 			//añadido del nodo a el objeto lista
 			obj.push_back(assistant);
 		}
@@ -94,4 +161,3 @@ por revisar:
 https://ducciogasparri.it/2019/12/06/best-plot-and-charting-c-packages-for-data-visualization/
 
 */
-
