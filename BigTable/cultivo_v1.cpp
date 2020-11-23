@@ -32,16 +32,7 @@ BigTable::~BigTable(){
 */
 
 int BigTable::size(){
-
-	List* sublist = nullptr; 
-	int quantity = 0;
-	
-	for (int i =0; i<tableSize; i++){
-		sublist = table[i];
-		quantity += sublist->size();
-	}	
-	
-	return quantity;
+	return count;
 }
 
 
@@ -50,10 +41,11 @@ int BigTable::size(){
 */
 
 void BigTable::insert(Node* n){
-	
-	List* sublist = table[n->minute]; 	
+
+	List* sublist = table[n->minute];
 	cout<<"acceso al bucket"<<endl;
-	sublist->push_back(n);	
+	sublist->push_back(n);
+	count++;
 }
 
 /*
@@ -62,28 +54,28 @@ void BigTable::insert(Node* n){
 
 void BigTable::display(){
 
-	List* sublist = nullptr; 
+	List* sublist = nullptr;
 
 	for (int i =0; i<tableSize; i++){
 		sublist = table[i];
-		if(sublist->size() == 0) continue; 
+		if(sublist->size() == 0) continue;
 
 		cout << "\t************************"<<endl;
 		cout << "\t Bucket: " << i <<endl;
 		cout << "\t************************"<<endl;
-		sublist->display();		
-	}	
+		sublist->display();
+	}
 }
 
 
 void BigTable::displayDistro(){
-	
-	List* sublist = nullptr; 
+
+	List* sublist = nullptr;
 
 	for (int i =0; i<tableSize; i++){
 		sublist = table[i];
 		cout<<"Elements in Bucket "<<i<< " :\t" << sublist->size()<<endl;
-	}	
+	}
 }
 
 
