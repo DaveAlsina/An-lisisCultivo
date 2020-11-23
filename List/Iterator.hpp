@@ -6,12 +6,13 @@ struct Node{
         //estructura que almacena todos los datos que se
         //requieren para representar el data set
 
-        Node(short int d = 0, short int m = 0, short int min = 0, double t=0,
-        double hi = 0, double dp = 0, short int h = 0): day(d), month(m), minute(min), temp(t), heatIndx(hi), dewPoint(dp), hum(h){}
+        Node(int yr = 0, short int m = 0, short int d = 0, int min = 0, double t=0,
+        double hi = 0, double dp = 0, short int h = 0): year(yr),  month(m), day(d), dayMinute(min), temp(t), heatIndx(hi), dewPoint(dp), hum(h){}
 
-        short int day;
+        int year;
         short int month;
-        short int minute;
+        short int day;
+        int dayMinute;
 
         double temp;
         double heatIndx;
