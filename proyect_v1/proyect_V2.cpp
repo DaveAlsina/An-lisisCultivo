@@ -10,10 +10,11 @@
 
 #include "../List/Iterator.hpp"
 #include "../List/list.hpp"
+#include "../BigTable/cultivo_v1.hpp"
 
 using namespace std;
 
-void readCsv(List& obj, string dir);
+void readCsv(BigTable& obj, string dir);
 int convert_unixt_day_min(time_t rawtime);
 int convert_unixt_day(time_t rawtime);
 int convert_unixt_month(time_t rawtime);
@@ -36,14 +37,10 @@ int main(){
         lst.push_back(empty1);
 	*/
 
-	List lst;
-	readCsv(lst , "generalData.csv");
-
-	for(Iterator it = lst.Begin(); it != nullptr; ++it){
-		cout << "Mes: " << it->month << " Día: " << it->day << " Minuto: " << it->minute << endl;
-		cout << "temp: " << it->temp << " HeatIndx: " << it->heatIndx << " dp: " << it->dewPoint << " hum: " << it->hum;
-		cout << endl << endl;
-	}
+	BigTable mitabla;
+	readCsv(mitabla , "generalData.csv");
+	
+	mitabla.displayDistro();
 
 	return 0;
 }
@@ -112,7 +109,7 @@ int convert_unixt_year(time_t rawtime){
 }
 
 
-void readCsv(List& obj, string dir){
+void readCsv(BigTable& obj, string dir){
 
 	ifstream temporal(dir);  //input file stream en el archivo csv
 	string line; 		 //guarda las lineas que se van leyendo del csv
@@ -137,11 +134,16 @@ void readCsv(List& obj, string dir){
 			ss >> date;			  //guarda la última columna (la de la fecha) *WeNeedMagicHere!!!*
 			date /= 1000;
 
-			//guardado de los datos en un nodo asistente
-			Node* assistant = new Node(0,0,0, cols[0], cols[1], cols[2], cols[3]);
+			int yr = convert_unixt_year(date);
+			int month = convert_unixt_month(date);
+			int day = convert_unixt_day(date);
+			int daymin = convert_unixt_day_min(date);
 
-			//añadido del nodo a el objeto lista
-			obj.push_back(assistant);
+			//guardado de los datos en un nodo asistente
+			Node* assistant = new Node(yr,month,day,daymin,cols[0], cols[1], cols[2], cols[3]);
+
+			//añadido del nodo a el objeto BigTable
+			obj.insert(assistant);
 		}
 	}
 
