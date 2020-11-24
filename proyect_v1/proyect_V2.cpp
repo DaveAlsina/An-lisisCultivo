@@ -42,6 +42,10 @@ int main(){
 	
 	mitabla.displayDistro();
 
+	cout<<"veces que ha estado en condiciones de humedad óptimas:  " << mitabla.optimalHum() <<"%"<<endl;
+        pair<double,double> optDay = mitabla.optimalTemp();
+        cout<<"veces en rango óptimo: Dia: " << optDay.first <<"%,   Noche: "<< optDay.second <<"%"<<endl;
+
 	return 0;
 }
 
@@ -115,6 +119,8 @@ void readCsv(BigTable& obj, string dir){
 	string line; 		 //guarda las lineas que se van leyendo del csv
 	double  cols[4];		 //variable que guarda los datos
 	long long int date = 0;	 //variable que guarda la fecha en tiempo unix
+
+	int error = 0; 		//cuenta el número de mediciones de temperatura o humedad erróneas
 
 	if(temporal.good()){	 //si el input file stream está bien
 
