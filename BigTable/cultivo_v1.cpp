@@ -49,6 +49,7 @@ int BigTable::hash(Node* n){
 *       Getters
 */
 
+
 float BigTable::get_mean_temp_dayMin(int dmin){
 	double tempSum;
 	int c = 0;
@@ -72,17 +73,12 @@ float BigTable::get_mean_hum_dayMin(int dmin){
 
 	cout << endl;
 	while (it!=nullptr) {
-		cout << "humedad = " << it->heatIndx << endl;
-		humSum+=it->heatIndx;
+		humSum+=it->hum;
 		c++;
 		it=it->next;
 	}
 	float h_mean = (float) humSum/c;
 	return h_mean;
-}
-
-int BigTable::size(){
-	return count;
 }
 
 float BigTable::get_mean_temp_hour(int hour){
@@ -119,7 +115,7 @@ float BigTable::get_mean_hum_hour(int hour){
 		Iterator it = assistant->Begin();	//iterador al principio de la lista
 
 		while (it != nullptr){
-			humSum += it->heatIndx;
+			humSum += it->hum;
 			c++;
 			it = it->next;
 		}
@@ -129,108 +125,112 @@ float BigTable::get_mean_hum_hour(int hour){
 	return h_mean;
 }
 
-// pair<double,double> BigTable::getOptHumRange(){
-// 	return hum;
-// }
-//
-//
-// pair<double,double> getOptTempRange(string time){
-// 	if ("day" == time)
-// 		return tempDay;
-// 	else if ("night" == time)
-// 		return tempNight;
-// 	else{
-// 		cout<<endl;
-// 		cout<<"recibió una franja temporal inválida las opciones son 'day' o 'night'"<<endl;
-// 		cout<<"se retornará la franja del día por defecto..."<<endl
-// 		cout<<endl;
-// 		return tempDay;
-// 	}
-// }
-//
-// double BigTable::optimalHum(){
-//
-// 	double inOptimalRange = 0;
-// 	List* assistant = nullptr;
-//
-// 	for(int i=0; i<tableSize; i++){
-// 		assistant = table[i];
-// 		Iterator it = assistant->Begin();	//iterador al principio de la lista
-//
-// 		while(it != nullptr){
-// 			if((it->hum < hum.second) and (it->hum > hum.first))
-// 				inOptimalRange += 1;
-//
-// 			it = it->next;
-// 		}
-// 	}
-//
-// 	double result = (inOptimalRange*100)/count;
-// 	return result;
-// }
-//
-// pair<double,double> BigTable::optimalTemp(){
-//
-// 	/*Funcion que retorna la pareja de doubles cuyo primer elemento representa
-// 	el porcentaje de veces que se estuvo en condiciones óptimas de día,
-// 	el segundo elemento es análogo al primero pero en la noche*/
-// 	pair<double, double> result;
-//
-// 	double inOptRangeDay = 0;
-// 	int dayCount = 0;
-// 	List* assistant = nullptr;
-//
-// 	//de 6 am a 6 pm
-// 	for(int i=360; i<1080; i++){
-// 		assistant = table[i];
-// 		Iterator it = assistant->Begin();	//iterador al principio de la lista
-//
-// 		while(it != nullptr){
-// 			if((it->temp < tempDay.second) and (it->temp > tempDay.first))
-// 				inOptRangeDay += 1;
-//
-// 			dayCount++;
-// 			it = it->next;
-// 		}
-// 	}
-//
-//
-// 	double inOptRangeNight = 0;
-// 	int nightCount = 0;
-//
-// 	//de 0 am a 6 am
-// 	for(int i=0; i<360; i++){
-// 		assistant = table[i];
-// 		Iterator it = assistant->Begin();	//iterador al principio de la lista
-//
-// 		while(it != nullptr){
-// 			if((it->temp < tempNight.second) and (it->temp > tempNight.first))
-// 				inOptRangeNight += 1;
-//
-// 			nightCount++;
-// 			it = it->next;
-// 		}
-// 	}
-//
-// 	//de 6 pm a 00 am
-// 	for(int i=1080; i<1440; i++){
-// 		assistant = table[i];
-// 		Iterator it = assistant->Begin();	//iterador al principio de la lista
-//
-// 		while(it != nullptr){
-// 			if((it->temp < tempNight.second) and (it->temp > tempNight.first))
-// 				inOptRangeNight += 1;
-//
-// 			nightCount++;
-// 			it = it->next;
-// 		}
-// 	}
-//
-// 	result.first = (inOptRangeDay*100)/dayCount;
-// 	result.second = (inOptRangeNight*100)/nightCount;
-//
-// 	return result;
-// }
+
+int BigTable::size(){
+	return count;
+}
+pair<double,double> BigTable::getOptHumRange(){
+	return hum;
+}
+
+
+pair<double,double> BigTable::getOptTempRange(string time){
+	if ("day" == time)
+		return tempDay;
+	else if ("night" == time)
+		return tempNight;
+	else{
+		cout<<endl;
+		cout<<"recibió una franja temporal inválida las opciones son 'day' o 'night'"<<endl;
+		cout<<"se retornará la franja del día por defecto..."<<endl;
+		cout<<endl;
+		return tempDay;
+	}
+}
+
+double BigTable::optimalHum(){
+
+	double inOptimalRange = 0;
+	List* assistant = nullptr;
+
+	for(int i=0; i<tableSize; i++){
+		assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while(it != nullptr){
+			if((it->hum < hum.second) and (it->hum > hum.first))
+				inOptimalRange += 1;
+
+			it = it->next;
+		}
+	}
+
+	double result = (inOptimalRange*100)/count;
+	return result;
+}
+
+pair<double,double> BigTable::optimalTemp(){
+
+	/*Funcion que retorna la pareja de doubles cuyo primer elemento representa
+	el porcentaje de veces que se estuvo en condiciones óptimas de día,
+	el segundo elemento es análogo al primero pero en la noche*/
+	pair<double, double> result;
+
+	double inOptRangeDay = 0;
+	int dayCount = 0;
+	List* assistant = nullptr;
+
+	//de 6 am a 6 pm
+	for(int i=360; i<1080; i++){
+		assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while(it != nullptr){
+			if((it->temp < tempDay.second) and (it->temp > tempDay.first))
+				inOptRangeDay += 1;
+
+			dayCount++;
+			it = it->next;
+		}
+	}
+
+
+	double inOptRangeNight = 0;
+	int nightCount = 0;
+
+	//de 0 am a 6 am
+	for(int i=0; i<360; i++){
+		assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while(it != nullptr){
+			if((it->temp < tempNight.second) and (it->temp > tempNight.first))
+				inOptRangeNight += 1;
+
+			nightCount++;
+			it = it->next;
+		}
+	}
+
+	//de 6 pm a 00 am
+	for(int i=1080; i<1440; i++){
+		assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while(it != nullptr){
+			if((it->temp < tempNight.second) and (it->temp > tempNight.first))
+				inOptRangeNight += 1;
+
+			nightCount++;
+			it = it->next;
+		}
+	}
+
+	result.first = (inOptRangeDay*100)/dayCount;
+	result.second = (inOptRangeNight*100)/nightCount;
+
+	return result;
+}
 
 /*
 *       Modifiers

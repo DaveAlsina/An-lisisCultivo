@@ -47,13 +47,12 @@ class BigTable{
 		pair<double,double> getOptTempRange(string time);
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
-		float get_mean_temp_dayMin(int min);
+		float get_mean_temp_dayMin(int dmin);
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
-		float get_mean_hum_dayMin(int min);
+		float get_mean_hum_dayMin(int dmin);
 
 		float get_mean_temp_hour(int hour);
-
 		float get_mean_hum_hour(int hour);
 
 		//obtiene el porcentaje de veces que se ha estado en un intervalo óptido de humedades

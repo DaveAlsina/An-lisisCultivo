@@ -7,7 +7,7 @@ struct Node{
         //requieren para representar el data set
 
         Node(int yr = 0, short int m = 0, short int d = 0, int min = 0, double t=0,
-        double hi = 0, double dp = 0, short int h = 0): year(yr),  month(m), day(d), dayMinute(min), temp(t), heatIndx(hi), dewPoint(dp), hum(h){}
+        short int h = 0, double hi = 0, double dp = 0): year(yr),  month(m), day(d), dayMinute(min), temp(t), heatIndx(hi), dewPoint(dp), hum(h){}
 
         int year;
         short int month;
@@ -54,12 +54,12 @@ class Iterator{
 /*'==' and '!=' operator*/
 
 bool operator!=(Iterator it, Node* ptr){
-	return it.getLink() != ptr; 
+	return it.getLink() != ptr;
 }
 
 
 bool operator==(Iterator it, Node* ptr){
-	return it.getLink() == ptr; 
+	return it.getLink() == ptr;
 }
 
 

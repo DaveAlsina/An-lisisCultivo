@@ -1,9 +1,9 @@
 #ifdef _Iterator_hpp_
 #ifndef _Iterator_cpp_
-#define _Iterator_cpp_ 
+#define _Iterator_cpp_
 
 #include "Iterator.hpp"
-#include <iostream> 
+#include <iostream>
 
 using namespace std;
 				/*Clase Iterator*/
@@ -14,12 +14,12 @@ using namespace std;
  *
  */
 Iterator::Iterator(Node* pointer){
-	link = pointer;  
+	link = pointer;
 }
 
 
 Iterator::~Iterator(){
-	link = nullptr;	
+	link = nullptr;
 	delete link;
 	//cout<<"destroyed iterator."<<endl;
 }
@@ -54,14 +54,14 @@ Node* Iterator::getLink()const{
 
 Iterator& Iterator::operator++(){ //prefijo++
 
-	link = link->next;  
+	link = link->next;
 	return *this;
 }
 
 
 Iterator& Iterator::operator--(){ //prefijo--
 
-	link = link->prev;  
+	link = link->prev;
 	return *this;
 }
 
@@ -72,7 +72,7 @@ Iterator& Iterator::operator--(){ //prefijo--
 
 Node* Iterator::operator->(){
 	return link;
-} 
+}
 
 
 

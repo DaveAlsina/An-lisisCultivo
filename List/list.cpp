@@ -13,9 +13,9 @@ using namespace std;
  */
 
 List::List(){
- 	start = nullptr; 
- 	end = nullptr; 
-	len = 0; 
+ 	start = nullptr;
+ 	end = nullptr;
+	len = 0;
 }
 
 List::~List(){
@@ -29,11 +29,11 @@ List::~List(){
  */
 
 void List::display(){
-	Iterator it = this->Begin();  
+	Iterator it = this->Begin();
 
 	for( ; it != nullptr; ++it){
 
-		cout<< it->year <<" "<< it->dayMinute <<" "<<it->day <<" "<<it->month <<endl; 
+		cout<< it->year <<" "<< it->dayMinute <<" "<<it->day <<" "<<it->month <<endl;
 		cout<< it->temp <<" "<< it->heatIndx<<" "<< it->dewPoint<<" " << it->hum <<" "<< endl;
 		cout<<endl;
 	}
@@ -45,22 +45,22 @@ unsigned List::size(){
 
 
 /*
- * Iterators Creation 
+ * Iterators Creation
  *
  */
 
 
 Iterator List::Begin(){
-	
-	Iterator it(start);  
-	return it;  
+
+	Iterator it(start);
+	return it;
 }
 
 
 Iterator List::End(){
-	
-	Iterator it(end);  
-	return it;  
+
+	Iterator it(end);
+	return it;
 }
 
 
@@ -73,25 +73,25 @@ Iterator List::End(){
 void List::push_back(Node* newElement){
 
 	if(len==0){
-	
+
 		end = newElement;  //el puntero al siguiente elemento del último nodo, lo apunta hacia el nuevo elemento
 		start = newElement;
 		len++;
-		return; 
+		return;
 	}
 
 	newElement->prev = end;	 //el puntero al elemento previo del elemento nuevo apunta hacia el final (el final viejo)
 	end->next = newElement;  //el puntero al siguiente elemento del último nodo, lo apunta hacia el nuevo elemento
-	end = newElement; 	 //el final ahora apunta hacia el elemento añadido recién	
+	end = newElement; 	 //el final ahora apunta hacia el elemento añadido recién
 
-	len++;	
+	len++;
 }
 
 void List::push_front(Node* newElement){
 
 	newElement->next = start;   //el puntero al siguiente elemento del nuevo nodo apunta hacia el start
-	start->prev = newElement; //el puntero al elemento previo del nodo en el principio (el viejo) apunta hacia el nuevo nodo 
-	start = newElement; 	   //el principio apunta hacia el elemento añadido recién 	
+	start->prev = newElement; //el puntero al elemento previo del nodo en el principio (el viejo) apunta hacia el nuevo nodo
+	start = newElement; 	   //el principio apunta hacia el elemento añadido recién
 
 	len++;
 }
@@ -102,13 +102,12 @@ void List::clear(){
 	Iterator it = Begin();
 
 	while(it.getLink() != nullptr){
-		
+
 		Node* old = it.getLink();
-		++it; 
+		++it;
 		delete old;
-		len--;	
+		len--;
 	}
-	cout<<"cleaned"<<endl;
 }
 
 #endif
