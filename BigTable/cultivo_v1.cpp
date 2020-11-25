@@ -63,8 +63,70 @@ float BigTable::get_mean_temp_dayMin(int dmin){
 	return t_mean;
 }
 
+float BigTable::get_mean_hum_dayMin(int dmin){
+	//Toca corregir el heatIndx por el hum
+	double humSum;
+	int c = 0;
+	List *assistant = table[dmin];
+	Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+	cout << endl;
+	while (it!=nullptr) {
+		cout << "humedad = " << it->heatIndx << endl;
+		humSum+=it->heatIndx;
+		c++;
+		it=it->next;
+	}
+	float h_mean = (float) humSum/c;
+	return h_mean;
+}
+
 int BigTable::size(){
 	return count;
+}
+
+float BigTable::get_mean_temp_hour(int hour){
+	int ini_hour = 60 * hour;
+	int fin_hour = ini_hour + 60;
+
+	double tempSum;
+	int c = 0;
+
+	for (int i = ini_hour; i<fin_hour; i++){
+		List *assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while (it != nullptr){
+			tempSum += it->temp;
+			c++;
+			it = it->next;
+		}
+	}
+
+	float t_mean = (float) tempSum/c;
+	return t_mean;
+}
+
+float BigTable::get_mean_hum_hour(int hour){
+	int ini_hour = 60 * hour;
+	int fin_hour = ini_hour + 60;
+
+	double humSum;
+	int c = 0;
+
+	for (int i = ini_hour; i<fin_hour; i++){
+		List *assistant = table[i];
+		Iterator it = assistant->Begin();	//iterador al principio de la lista
+
+		while (it != nullptr){
+			humSum += it->heatIndx;
+			c++;
+			it = it->next;
+		}
+	}
+
+	float h_mean = (float) humSum/c;
+	return h_mean;
 }
 
 // pair<double,double> BigTable::getOptHumRange(){
