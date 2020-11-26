@@ -41,18 +41,22 @@ int main(){
 	readCsv(mitabla , "generalData.csv");
 
 	mitabla.displayDistro();
+	cout<<endl;
+	mitabla.displayOptimalRanges();
 
-	cout<<"veces que ha estado en condiciones de humedad óptimas:  " << mitabla.optimalHum() <<"%"<<endl;
+	cout<<"Veces que ha estado en condiciones de humedad óptimas (% humedad relativa):  " << mitabla.optimalHum() <<"%"<<endl<<endl;;
         pair<double,double> optDay = mitabla.optimalTemp();
-        cout<<"veces en rango óptimo: Dia: " << optDay.first <<"%,   Noche: "<< optDay.second <<"%"<<endl;
 
-	cout << "Promedio de temperatura en el minuto 1000 = "<< mitabla.get_mean_temp_dayMin(1000) << endl;
+        cout<<"Veces en rango óptimo de temperatura (% sobre el total de datos para cada periodo de tiempo):" << endl;
+	cout<<"\tDía:  "<< optDay.first <<"%,   Noche: " << optDay.second <<"%"<<endl << endl;
 
-	cout << "Promedio de la temperatura en el minuto 4 del día = " << mitabla.get_mean_temp_dayMin(4) << endl;
-	cout << "Promedio de la humedad en el minuto 4 del día = " << mitabla.get_mean_hum_dayMin(4) << endl;
+	cout << "Promedio de temperatura en el minuto 1000 = "<< mitabla.get_mean_temp_dayMin(1000) <<" °C"<< endl <<endl;
 
-	cout << "Promedio de la temperatura en la hora 7 del día = " << mitabla.get_mean_temp_hour(7) << endl;
-	cout << "Promedio de la humedad en la hora 7 del día = " << mitabla.get_mean_hum_hour(7) << endl;
+	cout << "Promedio de la temperatura en el minuto 4 del día = " << mitabla.get_mean_temp_dayMin(4) <<" °C"<< endl;
+	cout << "Promedio de la humedad en el minuto 4 del día = " << mitabla.get_mean_hum_dayMin(4) <<" %"<< endl << endl;
+
+	cout << "Promedio de la temperatura en la hora 7 del día = " << mitabla.get_mean_temp_hour(7) <<" °C"<< endl;
+	cout << "Promedio de la humedad en la hora 7 del día = " << mitabla.get_mean_hum_hour(7) <<" %"<< endl;
 
 
 	return 0;
