@@ -17,12 +17,12 @@ class BigTable{
   		//Puntero al buckets que clasifican por toda la info en horas del día
 		List** table;
 
-		pair<double,double> hum; //par min y max de intervalos aceptables de humedades
-		pair<double,double> tempDay; //par min y max de intervalos aceptables de temperaturas (día)
-		pair<double,double> tempNight; //par min y max de intervalos aceptables de temperaturas (día)
+		pair<double,double> hum; 		//par min y max de intervalos aceptables de humedades
+		pair<double,double> tempDay; 		//par min y max de intervalos aceptables de temperaturas (día)
+		pair<double,double> tempNight; 		//par min y max de intervalos aceptables de temperaturas (día)
 
-		int tableSize;
-		int count; //numero de elementos en la tabla
+		int tableSize;			//tamaño de la tabla
+		int count; 			//numero de elementos en la tabla
 
 		//metodo que recibe una valor en unixtime, lo convierte a hora:min:seg, y lo envia a DayHour según la hora convertida
 		int hash(Node* n);
@@ -35,18 +35,21 @@ class BigTable{
 		/*
 		*	Modifiers
 		*/
+
 		//Agrega un 'Node' a las listas de los buckets
 		void insert(Node* n);
-		void chgHumRange(double min, double max);
-		void chgTempRange(string time,double min, double max);
+		void chgHumRange(double min, double max);			//cambia el rango óptimo para humedad
+		void chgTempRange(string time,double min, double max);		//cambia el rango óptimo para temperatura
 
 		/*
 		*	Getters
 		*/
-		int size(); //Returna el número de Nodes que tiene el HashTable
-		bool empty(); //true if there are no elements
-		pair<double,double> getOptHumRange();
-		pair<double,double> getOptTempRange(string time);
+		int size(); 							//Returna el número de Nodes que tiene el HashTable
+		bool empty();							//retorna el bool que indica presencia o ausencia de
+										//elementos
+
+		pair<double,double> getOptHumRange();				//devuelve una copia de los rangos óptimos para humedad 
+		pair<double,double> getOptTempRange(string time);		//devuelve una copia de los rangos óptimos para temperatura
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
 		float get_mean_temp_dayMin(int dmin);
@@ -57,18 +60,18 @@ class BigTable{
 		float get_mean_temp_hour(int hour);
 		float get_mean_hum_hour(int hour);
 
-		//obtiene el porcentaje de veces que se ha estado en un intervalo óptido de humedades
+		//obtiene el porcentaje de veces que se ha estado en un intervalo óptimo de humedades
 		double optimalHum(bool print = false);	//lo imprime si print es 'true'
 
-		//obtiene el porcentaje de veces que se ha estado en un intervalo óptido de temperaturas
+		//obtiene el porcentaje de veces que se ha estado en un intervalo óptimo  de temperaturas
 		pair<double,double> optimalTemp(bool print = false);	//lo imprime si print es 'true'
 
 		/*
 		*	Displayers
 		*/
-		void display(); //Imprime la tabla completa
-		void displayDistro(); //imprime la cantidad de elementos por lista
-		void displayOptimalRanges();
+		void display(); 		//Imprime la tabla completa
+		void displayDistro(); 		//imprime la cantidad de elementos por lista
+		void displayOptimalRanges();	//muestra con formato 
 };
 
 

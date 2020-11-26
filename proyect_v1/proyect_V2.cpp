@@ -43,8 +43,9 @@ int main(){
 	mitabla.displayDistro();
 	cout<<endl;
 
+	//muestra los rangos de condiciones óptimas por defecto y analiza la 
+	//cantidad de datos dentro de estos óptimos 
 	mitabla.displayOptimalRanges();
-
 	mitabla.optimalHum(true);
 	mitabla.optimalTemp(true);
 
