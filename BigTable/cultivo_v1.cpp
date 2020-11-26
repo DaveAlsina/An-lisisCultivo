@@ -262,6 +262,23 @@ void BigTable::insert(Node* n){
 	count++;
 }
 
+void BigTable::chgHumRange(double min, double max){
+	hum.first = min; hum.second = max;	
+}
+
+
+void BigTable::chgTempRange(string time,double min, double max){
+
+	if(time == "day"){
+		tempDay.first = min; tempDay.second = max;
+	}else if (time == "night"){
+		tempNight.first = min; tempNight.second = max;
+	}else{
+		cout<<"entrada inválida, se esperaba 'day'(para modificar el intervalo de día)"<<endl;
+		cout<<"o 'night'(para modificar el intervalo de noche)"<<endl;
+	}
+}
+
 /*
 *       Displayers
 */

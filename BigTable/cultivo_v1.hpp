@@ -37,6 +37,8 @@ class BigTable{
 		*/
 		//Agrega un 'Node' a las listas de los buckets
 		void insert(Node* n);
+		void chgHumRange(double min, double max);
+		void chgTempRange(string time,double min, double max);
 
 		/*
 		*	Getters
