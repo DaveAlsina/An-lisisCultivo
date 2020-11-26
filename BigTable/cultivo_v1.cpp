@@ -148,7 +148,7 @@ pair<double,double> BigTable::getOptTempRange(string time){
 	}
 }
 
-double BigTable::optimalHum(){
+double BigTable::optimalHum(bool print){
 
 	double inOptimalRange = 0;
 	List* assistant = nullptr;
@@ -166,10 +166,19 @@ double BigTable::optimalHum(){
 	}
 
 	double result = (inOptimalRange*100)/count;
+
+	if (print){
+		
+		cout<< endl <<"-----------------------------------------------------------------------------------"<<endl;
+		cout<< "Veces que ha estado en condiciones de humedad óptimas (% humedad relativa):  " 
+		<< result <<"%"<<endl;
+		cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;
+	}
+
 	return result;
 }
 
-pair<double,double> BigTable::optimalTemp(){
+pair<double,double> BigTable::optimalTemp(bool print){
 
 	/*Funcion que retorna la pareja de doubles cuyo primer elemento representa
 	el porcentaje de veces que se estuvo en condiciones óptimas de día,
@@ -228,6 +237,14 @@ pair<double,double> BigTable::optimalTemp(){
 
 	result.first = (inOptRangeDay*100)/dayCount;
 	result.second = (inOptRangeNight*100)/nightCount;
+
+	if(print){
+
+		cout<< endl <<"-----------------------------------------------------------------------------------"<<endl;
+		cout<<"Veces en rango óptimo de temperatura (% sobre el total de datos para cada periodo de tiempo):" << endl;
+		cout<<"\tDía:  "<< result.first <<"%,   Noche: " << result.second <<"%"<<endl;
+		cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;
+	}
 
 	return result;
 }

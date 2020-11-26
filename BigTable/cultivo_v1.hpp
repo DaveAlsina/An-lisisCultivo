@@ -56,10 +56,10 @@ class BigTable{
 		float get_mean_hum_hour(int hour);
 
 		//obtiene el porcentaje de veces que se ha estado en un intervalo óptido de humedades
-		double optimalHum();
+		double optimalHum(bool print = false);	//lo imprime si print es 'true'
 
 		//obtiene el porcentaje de veces que se ha estado en un intervalo óptido de temperaturas
-		pair<double,double> optimalTemp();
+		pair<double,double> optimalTemp(bool print = false);	//lo imprime si print es 'true'
 
 		/*
 		*	Displayers
