@@ -42,13 +42,20 @@ int main(){
 
 	mitabla.displayDistro();
 	cout<<endl;
+
 	mitabla.displayOptimalRanges();
 
-	cout<<"Veces que ha estado en condiciones de humedad óptimas (% humedad relativa):  " << mitabla.optimalHum() <<"%"<<endl<<endl;;
-        pair<double,double> optDay = mitabla.optimalTemp();
+	mitabla.optimalHum(true);
+	mitabla.optimalTemp(true);
 
-        cout<<"Veces en rango óptimo de temperatura (% sobre el total de datos para cada periodo de tiempo):" << endl;
-	cout<<"\tDía:  "<< optDay.first <<"%,   Noche: " << optDay.second <<"%"<<endl << endl;
+	//cambios de rangos optimos de temperaturas y humedades
+	mitabla.chgHumRange(50,80);
+	mitabla.chgTempRange("day",15,20);
+	mitabla.chgTempRange("night",15,20);
+
+	mitabla.displayOptimalRanges();
+	mitabla.optimalHum(true);
+	mitabla.optimalTemp(true);
 
 	cout << "Promedio de temperatura en el minuto 1000 = "<< mitabla.get_mean_temp_dayMin(1000) <<" °C"<< endl <<endl;
 
