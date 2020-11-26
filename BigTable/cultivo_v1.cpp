@@ -1,5 +1,5 @@
 #ifdef _cultivo_v1_hpp_
-
+#define	_cultivo_v1_cpp_
 using namespace std;
 
 /*
@@ -26,8 +26,8 @@ BigTable::BigTable(){
 	tempDay.second = 23;
 
 	//intervalos por defecto de porcentajes correctos de temperatura (15-18)°C noche
-	tempDay.first = 15;
-	tempDay.second = 18;
+	tempNight.first = 15;
+	tempNight.second = 18;
 }
 
 BigTable::~BigTable(){
@@ -55,6 +55,7 @@ float BigTable::get_mean_temp_dayMin(int dmin){
 	int c = 0;
 	List *assistant = table[dmin];
 	Iterator it = assistant->Begin();	//iterador al principio de la lista
+
 	while (it!=nullptr) {
 		tempSum+=it->temp;
 		c++;
@@ -71,7 +72,6 @@ float BigTable::get_mean_hum_dayMin(int dmin){
 	List *assistant = table[dmin];
 	Iterator it = assistant->Begin();	//iterador al principio de la lista
 
-	cout << endl;
 	while (it!=nullptr) {
 		humSum+=it->hum;
 		c++;
@@ -275,6 +275,15 @@ void BigTable::displayDistro(){
 	}
 }
 
+void BigTable::displayOptimalRanges(){
+ 
+	cout<<"-----------------------------------------------------------------------------------"<<endl;
 
+        cout<<"Intervalos de condiciones óptimas:"<<endl;
+        cout<<"\t En temperatura(día): \t\t\t mínimo -> "<< tempDay.first << "°C\t máximo -> "<< tempDay.second <<"°C"<<endl; 
+        cout<<"\t En temperatura(noche): \t\t mínimo -> "<< tempNight.first << "°C\t máximo -> "<< tempNight.second <<"°C"<<endl;
+        cout<<"\t En humedad (24h)(humedad relativa %): \t mínimo -> "<< hum.first << "%\t máximo -> "<< hum.second <<"%"<<endl;
+	cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;
+}
 
 #endif

@@ -66,6 +66,7 @@ class BigTable{
 		*/
 		void display(); //Imprime la tabla completa
 		void displayDistro(); //imprime la cantidad de elementos por lista
+		void displayOptimalRanges();
 };
 
 
