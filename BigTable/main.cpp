@@ -15,6 +15,9 @@ int main(){
 	mitabla.insert(n3);
 	cout<<"insersión de nodo  exitosa!"<<endl;
 
+	mitabla.errorDetected();
+	cout << "Número de errores: " << mitabla.number_errors() << endl;
+
 	mitabla.display();
 	mitabla.displayDistro();
 	cout<<"cantidad de elementos en el hashtable:\t"<<mitabla.size()<<endl;

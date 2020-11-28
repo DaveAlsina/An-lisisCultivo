@@ -11,6 +11,7 @@ BigTable::BigTable(){
 
 	tableSize = TABLE_SIZE; //inicializa el tamaño de la tabla
 	count = 0;
+	errorCount = 0;
 	table = new List*[tableSize]; //reserva el espacio de memoria en heap
 
 	for (int i=0; i<tableSize; i++){ //inicializa los punteros hacia una lista en memoria dinámica
@@ -168,9 +169,9 @@ double BigTable::optimalHum(bool print){
 	double result = (inOptimalRange*100)/count;
 
 	if (print){
-		
+
 		cout<< endl <<"-----------------------------------------------------------------------------------"<<endl;
-		cout<< "Veces que ha estado en condiciones de humedad óptimas (% humedad relativa):  " 
+		cout<< "Veces que ha estado en condiciones de humedad óptimas (% humedad relativa):  "
 		<< result <<"%"<<endl;
 		cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;
 	}
@@ -249,6 +250,10 @@ pair<double,double> BigTable::optimalTemp(bool print){
 	return result;
 }
 
+int BigTable::number_errors(){
+	return errorCount;
+}
+
 /*
 *       Modifiers
 */
@@ -263,7 +268,7 @@ void BigTable::insert(Node* n){
 }
 
 void BigTable::chgHumRange(double min, double max){
-	hum.first = min; hum.second = max;	
+	hum.first = min; hum.second = max;
 }
 
 
@@ -279,6 +284,9 @@ void BigTable::chgTempRange(string time,double min, double max){
 	}
 }
 
+void BigTable::errorDetected(){
+	errorCount++;
+}
 /*
 *       Displayers
 */
@@ -300,7 +308,8 @@ void BigTable::display(){
 
 
 void BigTable::displayDistro(){
-
+	cout << "Tamaño de la tabla: " << size() << endl;
+	cout << "Número de errores encontrados en la lectura del csv: " << number_errors() << endl;
 	List* sublist = nullptr;
 
 	for (int i =0; i<tableSize; i++){
@@ -310,11 +319,11 @@ void BigTable::displayDistro(){
 }
 
 void BigTable::displayOptimalRanges(){
- 
+
 	cout<<"-----------------------------------------------------------------------------------"<<endl;
 
         cout<<"Intervalos de condiciones óptimas:"<<endl;
-        cout<<"\t En temperatura(día): \t\t\t mínimo -> "<< tempDay.first << "°C\t máximo -> "<< tempDay.second <<"°C"<<endl; 
+        cout<<"\t En temperatura(día): \t\t\t mínimo -> "<< tempDay.first << "°C\t máximo -> "<< tempDay.second <<"°C"<<endl;
         cout<<"\t En temperatura(noche): \t\t mínimo -> "<< tempNight.first << "°C\t máximo -> "<< tempNight.second <<"°C"<<endl;
         cout<<"\t En humedad (24h)(humedad relativa %): \t mínimo -> "<< hum.first << "%\t máximo -> "<< hum.second <<"%"<<endl;
 	cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;

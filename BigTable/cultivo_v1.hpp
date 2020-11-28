@@ -16,6 +16,7 @@ class BigTable{
 	private:
   		//Puntero al buckets que clasifican por toda la info en horas del día
 		List** table;
+		int errorCount;
 
 		pair<double,double> hum; 		//par min y max de intervalos aceptables de humedades
 		pair<double,double> tempDay; 		//par min y max de intervalos aceptables de temperaturas (día)
@@ -41,14 +42,16 @@ class BigTable{
 		void chgHumRange(double min, double max);			//cambia el rango óptimo para humedad
 		void chgTempRange(string time,double min, double max);		//cambia el rango óptimo para temperatura
 
+		void errorDetected(); //Suma 1 a errorCount y no agrega lo que hay en esa fila del csv
 		/*
 		*	Getters
 		*/
 		int size(); 							//Returna el número de Nodes que tiene el HashTable
 		bool empty();							//retorna el bool que indica presencia o ausencia de
 										//elementos
+		int number_errors(); // retorna el número de errores encontrados en la lectura del csv errorCount
 
-		pair<double,double> getOptHumRange();				//devuelve una copia de los rangos óptimos para humedad 
+		pair<double,double> getOptHumRange();				//devuelve una copia de los rangos óptimos para humedad
 		pair<double,double> getOptTempRange(string time);		//devuelve una copia de los rangos óptimos para temperatura
 
 		//Retorna la temperatura promedio de todos los datos que tiene dentro de una hora específica
@@ -71,7 +74,7 @@ class BigTable{
 		*/
 		void display(); 		//Imprime la tabla completa
 		void displayDistro(); 		//imprime la cantidad de elementos por lista
-		void displayOptimalRanges();	//muestra con formato 
+		void displayOptimalRanges();	//muestra con formato
 };
 
 

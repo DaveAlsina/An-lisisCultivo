@@ -43,8 +43,8 @@ int main(){
 	mitabla.displayDistro();
 	cout<<endl;
 
-	//muestra los rangos de condiciones óptimas por defecto y analiza la 
-	//cantidad de datos dentro de estos óptimos 
+	//muestra los rangos de condiciones óptimas por defecto y analiza la
+	//cantidad de datos dentro de estos óptimos
 	mitabla.displayOptimalRanges();
 	mitabla.optimalHum(true);
 	mitabla.optimalTemp(true);
@@ -166,11 +166,31 @@ void readCsv(BigTable& obj, string dir){
 			int day = convert_unixt_day(date);
 			int daymin = convert_unixt_day_min(date);
 
-			//guardado de los datos en un nodo asistente
-			Node* assistant = new Node(yr,month,day,daymin,cols[0], cols[1], cols[2], cols[3]);
+			//Rangos aceptables de variables del csv:
+			pair<double,double> tempAceptable (0,50);
+			pair<double,double> humAceptable (20,90);
+			//Falta confirmar el rango del heat y dp
+			pair<double,double> heatAceptable (0,40);
+			pair<double,double> dpAceptable (0,30);
 
-			//añadido del nodo a el objeto BigTable
-			obj.insert(assistant);
+			if (cols[0] > tempAceptable.first && cols[0] < tempAceptable.second){
+				if (cols[1] > humAceptable.first && cols[1] < humAceptable.second){
+					if (cols[2] > heatAceptable.first && cols[2] < heatAceptable.second){
+						if (cols[3] > dpAceptable.first && cols[3] < dpAceptable.second){
+							//guardado de los datos en un nodo asistente
+							Node* assistant = new Node(yr,month,day,daymin,cols[0], cols[1], cols[2], cols[3]);
+							//añadido del nodo a el objeto BigTable
+							obj.insert(assistant);
+						}
+						else{obj.errorDetected();}
+					}
+					else{obj.errorDetected();}
+				}
+				else{obj.errorDetected();}
+			}
+			else{obj.errorDetected();}
+
+
 		}
 	}
 
