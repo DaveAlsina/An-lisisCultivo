@@ -7,9 +7,7 @@
 #include <vector>
 #include <list>
 #include <string>
-
 using namespace std;
-
 
 //traer los datos usando IMAPS y búsqueda
 //void bringFromMail()*
@@ -66,7 +64,6 @@ int main(){
 
   cout<<"Cantidad de parejas de datos(de Punto de Rocio): "<<tableDewPoint.size()<<endl;
   readData(tableDewPoint);
-
 
 }
 
