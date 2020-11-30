@@ -25,5 +25,7 @@ int main(){
 	cout<<"veces en rango de humedad óptmo: " << mitabla.optimalHum()  <<"%"<<endl;
 	pair<double,double> optDay = mitabla.optimalTemp();
 	cout<<"veces en rango óptimo: Dia: " <<optDay.first<<"%,   Noche: "<< optDay.second <<"%"<<endl;
+	cout << endl;
+	// cout << "Prueba de stdDeviation_Hour en 1 = " << mitabla.stdDeviation_Hour(0, "temp") << endl;
 	return 0;
 }

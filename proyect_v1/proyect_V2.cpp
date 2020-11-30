@@ -15,61 +15,11 @@
 
 using namespace std;
 
-void readCsv(BigTable& obj, string dir);
-int convert_unixt_day_min(time_t rawtime);
-int convert_unixt_day(time_t rawtime);
-int convert_unixt_month(time_t rawtime);
-int convert_unixt_year(time_t rawtime);
-
-int main(){
-	/*
-	 * couts para verificar que los includes funcionan correctamente
-	 *
-        //testeo constructor por defecto de Node
-        Node* empty1 = new Node;
-
-        //testeo contructor de iterador
-        Iterator it(empty1);
-
-        //testeo creación de lista vacía
-        List lst;
-        cout<<endl<<"Lista creada"<<endl;
-
-        lst.push_back(empty1);
-	*/
-
-	BigTable mitabla;
-	readCsv(mitabla , "generalData.csv");
-
-	mitabla.displayDistro();
-	cout<<endl;
-
-	//muestra los rangos de condiciones óptimas por defecto y analiza la
-	//cantidad de datos dentro de estos óptimos
-	mitabla.displayOptimalRanges();
-	mitabla.optimalHum(true);
-	mitabla.optimalTemp(true);
-
-	//cambios de rangos optimos de temperaturas y humedades
-	mitabla.chgHumRange(50,80);
-	mitabla.chgTempRange("day",15,20);
-	mitabla.chgTempRange("night",15,20);
-
-	mitabla.displayOptimalRanges();
-	mitabla.optimalHum(true);
-	mitabla.optimalTemp(true);
-
-	cout << "Promedio de temperatura en el minuto 1000 = "<< mitabla.get_mean_temp_dayMin(1000) <<" °C"<< endl <<endl;
-
-	cout << "Promedio de la temperatura en el minuto 4 del día = " << mitabla.get_mean_temp_dayMin(4) <<" °C"<< endl;
-	cout << "Promedio de la humedad en el minuto 4 del día = " << mitabla.get_mean_hum_dayMin(4) <<" %"<< endl << endl;
-
-	cout << "Promedio de la temperatura en la hora 7 del día = " << mitabla.get_mean_temp_hour(7) <<" °C"<< endl;
-	cout << "Promedio de la humedad en la hora 7 del día = " << mitabla.get_mean_hum_hour(7) <<" %"<< endl;
-
-
-	return 0;
-}
+// void readCsv(BigTable& obj, string dir);
+// int convert_unixt_day_min(time_t rawtime);
+// int convert_unixt_day(time_t rawtime);
+// int convert_unixt_month(time_t rawtime);
+// int convert_unixt_year(time_t rawtime);
 
 int convert_unixt_day_min(time_t rawtime){
   //Función que recibe un número en unixtime y retorna el minuto del día

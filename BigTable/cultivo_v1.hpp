@@ -36,7 +36,7 @@ class BigTable{
 
 
 		/*
-		*	Modifiers 
+		*	Modifiers
 		*/
 
 		//Agrega un 'Node' a las listas de los buckets
@@ -44,8 +44,8 @@ class BigTable{
 		void chgHumRange(double min, double max);					//cambia el rango óptimo para humedad
 		void chgTempRange(string time,double min, double max);		//cambia el rango óptimo para temperatura
 
-		//Suma 1 a errorCount y no agrega lo que hay en esa fila del csv		
-		void errorDetected(); 
+		//Suma 1 a errorCount y no agrega lo que hay en esa fila del csv
+		void errorDetected();
 
 		/*
 		*	Getters
@@ -73,9 +73,9 @@ class BigTable{
 
 		//obtiene el porcentaje de veces que se ha estado en un intervalo óptimo  de temperaturas
 		pair<double,double> optimalTemp(bool print = false);	//lo imprime si print es 'true'
-			
 
-		double stdDeviation_Hour(int h);
+
+		double stdDeviation_Hour(int h, string varible);
 		vector<pair<double, double>> stdDeviation_24H(string varible, bool print = false);
 
 		/*

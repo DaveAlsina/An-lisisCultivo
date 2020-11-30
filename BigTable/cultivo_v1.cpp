@@ -1,5 +1,7 @@
 #ifdef _cultivo_v1_hpp_
 #define	_cultivo_v1_cpp_
+
+#include <cmath>
 using namespace std;
 
 /*
@@ -33,11 +35,11 @@ BigTable::BigTable(){
 
 BigTable::~BigTable(){
 
-	for (int i=0; i<tableSize; i++){	//borra cada sublista  
+	for (int i=0; i<tableSize; i++){	//borra cada sublista
 		delete table[i];
 	}
 
-	delete[] table;						//borra el array 
+	delete[] table;						//borra el array
 }
 
 
@@ -49,7 +51,6 @@ int BigTable::hash(Node* n){
 /*
 *       Getters
 */
-
 
 float BigTable::get_mean_temp_dayMin(int dmin){
 	double tempSum;
@@ -70,7 +71,7 @@ float BigTable::get_mean_hum_dayMin(int dmin){
 
 	double humSum;									//variable que almacena la suma
 	int c = 0;										//contador de nodos
-	List *assistant = table[dmin];					//acceso al principio del sublist 
+	List *assistant = table[dmin];					//acceso al principio del sublist
 	Iterator it = assistant->Begin();				//iterador al principio de la lista
 
 	while (it!=nullptr) {							//sumatoria
@@ -132,20 +133,20 @@ int BigTable::size(){									//retorna el la cantidad de nodos
 	return count;
 }
 pair<double,double> BigTable::getOptHumRange(){			//retorna los Intervalos de humedad optimos para la humedad
-	return hum;										
+	return hum;
 }
 
 
-pair<double,double> BigTable::getOptTempRange(string time){	 
+pair<double,double> BigTable::getOptTempRange(string time){
 	//recibe el intervalo 'day'/'night' y retorna el rango  optimo de temperaturas
-	
+
 	if ("day" == time)
 		return tempDay;										//retorna el intervalo para el día
 	else if ("night" == time)
 		return tempNight;									//retorna el intervalo para la noche
 	else{
 															//muestra mensaje de error y retorna el intervalo del día por defecto
-		cout<<endl;											
+		cout<<endl;
 		cout<<"recibió una franja temporal inválida las opciones son 'day' o 'night'"<<endl;
 		cout<<"se retornará la franja del día por defecto..."<<endl;
 		cout<<endl;
@@ -153,10 +154,10 @@ pair<double,double> BigTable::getOptTempRange(string time){
 	}
 }
 
-double BigTable::optimalHum(bool print){	
+double BigTable::optimalHum(bool print){
 	/*Retorna las veces (% porcentaje) que se ha estado en condiciones
-	 * optimas de humedad, si print ==  true, hace un respectivo display 
-	 * del resultado 
+	 * optimas de humedad, si print ==  true, hace un respectivo display
+	 * del resultado
 	 */
 
 	double inOptimalRange = 0;						//variable contador de las veces dentro del rango óptimo
@@ -167,7 +168,7 @@ double BigTable::optimalHum(bool print){
 		Iterator it = assistant->Begin();			//iterador al principio de la lista
 
 		while(it != nullptr){						//suma de las incidencias dentro del rango
-			if((it->hum < hum.second) and (it->hum > hum.first))			
+			if((it->hum < hum.second) and (it->hum > hum.first))
 				inOptimalRange += 1;
 
 			it = it->next;
@@ -195,12 +196,12 @@ pair<double,double> BigTable::optimalTemp(bool print){
 
 	pair<double, double> result;
 
-	double inOptRangeDay = 0;					//variable contador de incidencias para el dia 
+	double inOptRangeDay = 0;					//variable contador de incidencias para el dia
 	int dayCount = 0;							//variable contadora de numero de datos en el día
 	List* assistant = nullptr;
 
 	//suma de insidencias de 6 am a 6 pm
-	
+
 	for(int i=360; i<1080; i++){
 		assistant = table[i];
 		Iterator it = assistant->Begin();	//iterador al principio de la lista
@@ -246,7 +247,7 @@ pair<double,double> BigTable::optimalTemp(bool print){
 		}
 	}
 
-	result.first = (inOptRangeDay*100)/dayCount;		//calculo de los porcentajes 
+	result.first = (inOptRangeDay*100)/dayCount;		//calculo de los porcentajes
 	result.second = (inOptRangeNight*100)/nightCount;
 
 	if(print){
@@ -263,6 +264,78 @@ pair<double,double> BigTable::optimalTemp(bool print){
 int BigTable::number_errors(){
 	return errorCount;
 }
+
+double BigTable::stdDeviation_Hour(int h, string varible){
+	int ini_hour = 60 * h;
+	int fin_hour = ini_hour + 60;
+	float xmean;
+	double num = 0;
+	double c = 0;
+
+	if (varible == "temp"){
+		xmean = get_mean_temp_hour(h);
+		for (int i = ini_hour; i<fin_hour; i++){
+			List *assistant = table[i];
+			Iterator it = assistant->Begin();			//iterador al principio de la lista
+
+			while (it != nullptr){
+				double diferencia = xmean - it->temp;
+				num += pow(diferencia,2);
+				c++;
+				it = it->next;
+			}
+		}
+	}
+	else if (varible == "hum"){
+		xmean = get_mean_hum_hour(h);
+		for (int i = ini_hour; i<fin_hour; i++){
+			List *assistant = table[i];
+			Iterator it = assistant->Begin();			//iterador al principio de la lista
+
+			while (it != nullptr){
+				double diferencia = xmean - it->hum;
+				num += pow(diferencia,2);
+				c++;
+				it = it->next;
+			}
+		}
+	}
+
+	double stdD = sqrt(num/c);
+	return stdD;
+}
+
+vector<pair<double, double>> BigTable::stdDeviation_24H(string varible, bool print){
+	vector<pair<double,double>> myvec;
+	for (int h = 0; h <= 23; h++){
+		pair<double,double> mypair;
+		if (varible == "temp"){
+			mypair.first = get_mean_temp_hour(h);
+			mypair.second = stdDeviation_Hour(h,varible);
+		}
+		else if (varible == "hum"){
+			mypair.first = get_mean_hum_hour(h);
+			mypair.second = stdDeviation_Hour(h,varible);
+		}
+		myvec.push_back(mypair);
+	}
+	if (print == true){
+		cout << "Desviación estandar de la ";
+		if (varible == "temp"){
+			cout << "temperatura en °C" << endl;
+		}
+		else if (varible == "hum"){
+			cout << "humedad en humedad relativa (%)" << endl;
+		}
+
+		for (int h = 0; h<=23; h+=2){
+			cout << "Hora: " << h << "\tMedia: " << myvec[h].first << "\tDesviación estandar: " << myvec[h].second << "\t||"
+			<< "\tHora: " << h+1 << "\tMedia: " << myvec[h+1].first << "\tDesviación estandar: " << myvec[h+1].second << endl;
+		}
+	}
+	return myvec;
+}
+
 
 /*
 *       Modifiers
