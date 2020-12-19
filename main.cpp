@@ -12,11 +12,11 @@
 #include "List/Iterator.hpp"
 #include "List/list.hpp"
 #include "BigTable/cultivo_v1.hpp"
-#include "proyect_v1/proyect_V2.cpp"
+#include "DataHandling/proyect_V2.cpp"
 
 int main(){
 	BigTable mitabla;
-	readCsv(mitabla , "proyect_v1/generalData.csv");
+	readCsv(mitabla , "DataHandling/generalData.csv");
 
 	// mitabla.displayDistro();
 	cout<<endl;
