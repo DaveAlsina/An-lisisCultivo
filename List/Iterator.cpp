@@ -6,8 +6,8 @@
 #include <iostream>
 
 using namespace std;
-				/*Clase Iterator*/
 
+				/*Clase Iterator*/
 
 /*
  * Contructors and Destructors
