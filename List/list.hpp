@@ -33,8 +33,6 @@ class List{
 		 */
 
 		void push_back(Node* newElement);
-		void push_front(Node* newElement);
-
 		void clear();
 
 		/*
