@@ -4,14 +4,13 @@
 
 int main(){
 
-
 	//testeo constructor por defecto de Node
 	Node* empty1 = new Node;
 	Node* empty2 = new Node{2020,7,8,9,10,11,12,13};
 	Node* empty3 = new Node{2020,1,2,3,4,5,6,7};
 
 
-        //testeo contructor de iterador
+    //testeo contructor de iterador
 	Iterator it(empty1);
 
 	//testeo de operador de acesso a miembro de clase en Iterador
