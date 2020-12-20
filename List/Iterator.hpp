@@ -45,8 +45,8 @@ class Iterator{
                 Iterator& operator++();
                 Iterator& operator--();
 
-		/*member of pointer*/
-		Node* operator->();
+				/*member of pointer*/
+				Node* operator->();
 
 };
 
