@@ -8,7 +8,6 @@ using namespace std;
 *       Constructors and Destructors
 */
 
-
 BigTable::BigTable(){
 
 	tableSize = TABLE_SIZE;						//inicializa el tamaño de la tabla
