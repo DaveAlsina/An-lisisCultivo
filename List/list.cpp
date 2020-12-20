@@ -87,14 +87,6 @@ void List::push_back(Node* newElement){
 	len++;
 }
 
-void List::push_front(Node* newElement){
-
-	newElement->next = start;   //el puntero al siguiente elemento del nuevo nodo apunta hacia el start
-	start->prev = newElement; //el puntero al elemento previo del nodo en el principio (el viejo) apunta hacia el nuevo nodo
-	start = newElement; 	   //el principio apunta hacia el elemento añadido recién
-
-	len++;
-}
 
 //Deleters
 void List::clear(){
